@@ -29,7 +29,7 @@ const Register = () => {
     setError('')
 
     try {
-      const response = await axios.post('/api/users/register', formData, {
+      const response = await axios.post('https://code-algo.onrender.com/api/users/register', formData, {
         withCredentials: true
       })
       

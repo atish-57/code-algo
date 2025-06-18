@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/users/logout', {}, {
+      await axios.post('https://code-algo.onrender.com/api/users/logout', {}, {
         withCredentials: true 
       });
       logout();
-      navigate('/login');
+      checkAuth(); // Check auth status after logout
+      navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
     }

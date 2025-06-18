@@ -35,7 +35,7 @@ const Login = () => {
         password: formData.password
       }
 
-      const response = await axios.post('/api/users/login', loginData, {
+      const response = await axios.post('https://code-algo.onrender.com/api/users/login', loginData, {
         withCredentials: true
       })
       
