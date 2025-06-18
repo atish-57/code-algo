@@ -6,7 +6,7 @@ import { ApiError } from './utils/ApiError.js';
 const app = express();
 
 app.use(cors({
-    origin: true, 
+    origin: "https://codealgo.onrender.com/", 
     credentials: true
 }))
 
