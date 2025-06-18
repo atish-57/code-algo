@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, logout, checkAuth } = useAuth();
+  const { isAuthenticated, logout, checkAuth, isLoading } = useAuth();
 
   useEffect(() => {
     checkAuth();
@@ -17,12 +17,30 @@ const Topbar = () => {
         withCredentials: true 
       });
       logout();
-      checkAuth(); // Check auth status after logout
       navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
+      // Even if the server request fails, we should still log out locally
+      logout();
+      navigate('/');
     }
   };
+
+  if (isLoading) {
+    return (
+      <nav className="bg-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex-shrink-0">
+              <Link to="/">
+                <h1 className="text-2xl font-bold text-blue-600">CodeAlgo</h1>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="bg-white shadow-md">

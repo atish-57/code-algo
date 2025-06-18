@@ -83,7 +83,10 @@ const loginUser = asyncHandler(async (req, res) =>{
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: 'none'
+        sameSite: 'none',
+        domain: '.onrender.com',
+        path: '/',
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
     return res
     .status(200)
@@ -116,7 +119,9 @@ const logoutUser = asyncHandler(async(req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: 'none'
+        sameSite: 'none',
+        domain: '.onrender.com',
+        path: '/'
     }
 
     return res
